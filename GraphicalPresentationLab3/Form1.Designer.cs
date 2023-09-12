@@ -30,104 +30,98 @@
         {
             components = new System.ComponentModel.Container();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            типЛинииToolStripMenuItem = new ToolStripMenuItem();
-            толщинаToolStripMenuItem = new ToolStripMenuItem();
-            цветФонаToolStripMenuItem = new ToolStripMenuItem();
-            цветЛинииОбводкиToolStripMenuItem = new ToolStripMenuItem();
-            непрерывнаяToolStripMenuItem = new ToolStripMenuItem();
-            пунктирнаяToolStripMenuItem = new ToolStripMenuItem();
-            toolStripMenuItem2 = new ToolStripMenuItem();
-            toolStripMenuItem3 = new ToolStripMenuItem();
-            toolStripMenuItem4 = new ToolStripMenuItem();
-            comboBox1 = new ComboBox();
+            lineTypeToolStripMenuItem = new ToolStripMenuItem();
+            uninterruptedToolStripMenuItem = new ToolStripMenuItem();
+            dottedToolStripMenuItem = new ToolStripMenuItem();
+            lineWeightToolStripMenuItem = new ToolStripMenuItem();
+            fiveWeightToolStripMenuItem = new ToolStripMenuItem();
+            tenWeightToolStripMenuItem = new ToolStripMenuItem();
+            fifteenWeightToolStripMenuItem = new ToolStripMenuItem();
+            backgroundColorToolStripMenuItem = new ToolStripMenuItem();
+            lineColorToolStripMenuItem = new ToolStripMenuItem();
+            brushColorDialog = new ColorDialog();
+            penColorDialog = new ColorDialog();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { типЛинииToolStripMenuItem, толщинаToolStripMenuItem, цветФонаToolStripMenuItem, цветЛинииОбводкиToolStripMenuItem });
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { lineTypeToolStripMenuItem, lineWeightToolStripMenuItem, backgroundColorToolStripMenuItem, lineColorToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(188, 114);
+            contextMenuStrip1.Size = new Size(223, 100);
             // 
-            // типЛинииToolStripMenuItem
+            // lineTypeToolStripMenuItem
             // 
-            типЛинииToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { непрерывнаяToolStripMenuItem, пунктирнаяToolStripMenuItem });
-            типЛинииToolStripMenuItem.Name = "типЛинииToolStripMenuItem";
-            типЛинииToolStripMenuItem.Size = new Size(187, 22);
-            типЛинииToolStripMenuItem.Text = "Тип линии";
+            lineTypeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { uninterruptedToolStripMenuItem, dottedToolStripMenuItem });
+            lineTypeToolStripMenuItem.Name = "lineTypeToolStripMenuItem";
+            lineTypeToolStripMenuItem.Size = new Size(222, 24);
+            lineTypeToolStripMenuItem.Text = "Тип линии";
             // 
-            // толщинаToolStripMenuItem
+            // uninterruptedToolStripMenuItem
             // 
-            толщинаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem4 });
-            толщинаToolStripMenuItem.Name = "толщинаToolStripMenuItem";
-            толщинаToolStripMenuItem.Size = new Size(187, 22);
-            толщинаToolStripMenuItem.Text = "Толщина";
+            uninterruptedToolStripMenuItem.Name = "uninterruptedToolStripMenuItem";
+            uninterruptedToolStripMenuItem.Size = new Size(190, 26);
+            uninterruptedToolStripMenuItem.Text = "Непрерывная";
+            uninterruptedToolStripMenuItem.Click += uninterruptedToolStripMenuItem_Click;
             // 
-            // цветФонаToolStripMenuItem
+            // dottedToolStripMenuItem
             // 
-            цветФонаToolStripMenuItem.Name = "цветФонаToolStripMenuItem";
-            цветФонаToolStripMenuItem.Size = new Size(187, 22);
-            цветФонаToolStripMenuItem.Text = "Цвет фона";
-            цветФонаToolStripMenuItem.Click += цветФонаToolStripMenuItem_Click;
+            dottedToolStripMenuItem.Name = "dottedToolStripMenuItem";
+            dottedToolStripMenuItem.Size = new Size(190, 26);
+            dottedToolStripMenuItem.Text = "Пунктирная";
+            dottedToolStripMenuItem.Click += dottedToolStripMenuItem_Click;
             // 
-            // цветЛинииОбводкиToolStripMenuItem
+            // lineWeightToolStripMenuItem
             // 
-            цветЛинииОбводкиToolStripMenuItem.Name = "цветЛинииОбводкиToolStripMenuItem";
-            цветЛинииОбводкиToolStripMenuItem.Size = new Size(187, 22);
-            цветЛинииОбводкиToolStripMenuItem.Text = "Цвет линии обводки";
-            цветЛинииОбводкиToolStripMenuItem.Click += цветЛинииОбводкиToolStripMenuItem_Click;
+            lineWeightToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fiveWeightToolStripMenuItem, tenWeightToolStripMenuItem, fifteenWeightToolStripMenuItem });
+            lineWeightToolStripMenuItem.Name = "lineWeightToolStripMenuItem";
+            lineWeightToolStripMenuItem.Size = new Size(222, 24);
+            lineWeightToolStripMenuItem.Text = "Толщина";
             // 
-            // непрерывнаяToolStripMenuItem
+            // fiveWeightToolStripMenuItem
             // 
-            непрерывнаяToolStripMenuItem.Name = "непрерывнаяToolStripMenuItem";
-            непрерывнаяToolStripMenuItem.Size = new Size(180, 22);
-            непрерывнаяToolStripMenuItem.Text = "Непрерывная";
-            непрерывнаяToolStripMenuItem.Click += непрерывнаяToolStripMenuItem_Click;
+            fiveWeightToolStripMenuItem.Name = "fiveWeightToolStripMenuItem";
+            fiveWeightToolStripMenuItem.Size = new Size(108, 26);
+            fiveWeightToolStripMenuItem.Text = "5";
+            fiveWeightToolStripMenuItem.Click += fiveWeightToolStripMenuItem_Click;
             // 
-            // пунктирнаяToolStripMenuItem
+            // tenWeightToolStripMenuItem
             // 
-            пунктирнаяToolStripMenuItem.Name = "пунктирнаяToolStripMenuItem";
-            пунктирнаяToolStripMenuItem.Size = new Size(180, 22);
-            пунктирнаяToolStripMenuItem.Text = "Пунктирная";
-            пунктирнаяToolStripMenuItem.Click += пунктирнаяToolStripMenuItem_Click;
+            tenWeightToolStripMenuItem.Name = "tenWeightToolStripMenuItem";
+            tenWeightToolStripMenuItem.Size = new Size(108, 26);
+            tenWeightToolStripMenuItem.Text = "10";
+            tenWeightToolStripMenuItem.Click += tenWeightToolStripMenuItem_Click;
             // 
-            // toolStripMenuItem2
+            // fifteenWeightToolStripMenuItem
             // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(180, 22);
-            toolStripMenuItem2.Text = "5";
-            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
+            fifteenWeightToolStripMenuItem.Name = "fifteenWeightToolStripMenuItem";
+            fifteenWeightToolStripMenuItem.Size = new Size(108, 26);
+            fifteenWeightToolStripMenuItem.Text = "15";
+            fifteenWeightToolStripMenuItem.Click += fifteenWeightToolStripMenuItem_Click;
             // 
-            // toolStripMenuItem3
+            // backgroundColorToolStripMenuItem
             // 
-            toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(180, 22);
-            toolStripMenuItem3.Text = "10";
-            toolStripMenuItem3.Click += toolStripMenuItem3_Click;
+            backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
+            backgroundColorToolStripMenuItem.Size = new Size(222, 24);
+            backgroundColorToolStripMenuItem.Text = "Цвет фона";
+            backgroundColorToolStripMenuItem.Click += backgroundColorToolStripMenuItem_Click;
             // 
-            // toolStripMenuItem4
+            // lineColorToolStripMenuItem
             // 
-            toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(180, 22);
-            toolStripMenuItem4.Text = "15";
-            toolStripMenuItem4.Click += toolStripMenuItem4_Click;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(248, 171);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 1;
+            lineColorToolStripMenuItem.Name = "lineColorToolStripMenuItem";
+            lineColorToolStripMenuItem.Size = new Size(222, 24);
+            lineColorToolStripMenuItem.Text = "Цвет линии обводки";
+            lineColorToolStripMenuItem.Click += lineColorToolStripMenuItem_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(355, 319);
-            Controls.Add(comboBox1);
+            ClientSize = new Size(406, 425);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Лабораторная работа №3";
             Paint += Form1_Paint;
             MouseClick += Form1_MouseClick;
             contextMenuStrip1.ResumeLayout(false);
@@ -137,15 +131,16 @@
         #endregion
 
         private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem типЛинииToolStripMenuItem;
-        private ToolStripMenuItem непрерывнаяToolStripMenuItem;
-        private ToolStripMenuItem пунктирнаяToolStripMenuItem;
-        private ToolStripMenuItem толщинаToolStripMenuItem;
-        private ToolStripMenuItem toolStripMenuItem2;
-        private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem toolStripMenuItem4;
-        private ToolStripMenuItem цветФонаToolStripMenuItem;
-        private ToolStripMenuItem цветЛинииОбводкиToolStripMenuItem;
-        private ComboBox comboBox1;
+        private ToolStripMenuItem lineTypeToolStripMenuItem;
+        private ToolStripMenuItem uninterruptedToolStripMenuItem;
+        private ToolStripMenuItem dottedToolStripMenuItem;
+        private ToolStripMenuItem lineWeightToolStripMenuItem;
+        private ToolStripMenuItem fiveWeightToolStripMenuItem;
+        private ToolStripMenuItem tenWeightToolStripMenuItem;
+        private ToolStripMenuItem fifteenWeightToolStripMenuItem;
+        private ToolStripMenuItem backgroundColorToolStripMenuItem;
+        private ToolStripMenuItem lineColorToolStripMenuItem;
+        private ColorDialog brushColorDialog;
+        private ColorDialog penColorDialog;
     }
 }
