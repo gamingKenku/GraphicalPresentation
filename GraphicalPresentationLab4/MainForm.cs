@@ -8,6 +8,7 @@ namespace GraphicalPresentationLab4
         Bitmap bitmap;
         Brush brush;
         Color color;
+        Font font = new Font("Arial", 16);
         int weight_of_line;
 
         ItemForDrawing? item;
@@ -23,6 +24,7 @@ namespace GraphicalPresentationLab4
 
             brush = Brushes.Black;
             color = Color.Black;
+            font = new Font("Arial", 16);
             weight_of_line = 10;
         }
         private void updateBitmap()
@@ -59,6 +61,7 @@ namespace GraphicalPresentationLab4
                             }
                         case ((int)ItemForDrawing.TypeOfObject.String):
                             {
+                                g.DrawString(item.text, font, brush, item.start_coordinate);
                                 break;
                             }
                     }
@@ -69,8 +72,19 @@ namespace GraphicalPresentationLab4
 
         private void createObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateForm createForm = new CreateForm();
+            CreateObjectForm createForm = new CreateObjectForm();
 
+            createForm.ShowDialog();
+
+            item = createForm.item;
+
+            updateBitmap();
+        }
+
+        private void createStringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateStringForm createForm = new CreateStringForm();
+            
             createForm.ShowDialog();
 
             item = createForm.item;

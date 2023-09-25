@@ -1,6 +1,6 @@
 ﻿namespace GraphicalPresentationLab4
 {
-    partial class CreateForm
+    partial class CreateObjectForm
     {
         /// <summary>
         /// Required designer variable.

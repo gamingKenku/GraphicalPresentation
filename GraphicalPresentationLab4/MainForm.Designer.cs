@@ -74,6 +74,7 @@
             createStringToolStripMenuItem.Name = "createStringToolStripMenuItem";
             createStringToolStripMenuItem.Size = new Size(180, 22);
             createStringToolStripMenuItem.Text = "Строку";
+            createStringToolStripMenuItem.Click += createStringToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 

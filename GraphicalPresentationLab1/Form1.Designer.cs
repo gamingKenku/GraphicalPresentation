@@ -64,14 +64,14 @@
             // редактированиеToolStripMenuItem
             // 
             редактированиеToolStripMenuItem.Name = "редактированиеToolStripMenuItem";
-            редактированиеToolStripMenuItem.Size = new Size(180, 22);
+            редактированиеToolStripMenuItem.Size = new Size(163, 22);
             редактированиеToolStripMenuItem.Text = "Редактирование";
             редактированиеToolStripMenuItem.Click += редактированиеToolStripMenuItem_Click;
             // 
             // выходToolStripMenuItem
             // 
             выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(180, 22);
+            выходToolStripMenuItem.Size = new Size(163, 22);
             выходToolStripMenuItem.Text = "Выход";
             выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
             // 

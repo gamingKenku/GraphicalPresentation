@@ -40,5 +40,4 @@
             this.type_of_object =(int)TypeOfObject.String;
         }
     }
-    
 }

@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace GraphicalPresentationLab4
 {
-    public partial class CreateForm : Form
+    public partial class CreateObjectForm : Form
     {
         public ItemForDrawing? item;
-        public CreateForm()
+        public CreateObjectForm()
         {
             InitializeComponent();
         }
 
         private void createButton_Click(object sender, EventArgs e)
         {
+            this.CheckInput();
+
             int object_type = objectTypeComboBox.SelectedIndex;
 
             switch (object_type)
@@ -50,10 +52,6 @@ namespace GraphicalPresentationLab4
                         Point start_coordinates = StringToPoint(coordinatesTextBox.Text);
                         Size size = StringToSize(sizeTextBox.Text);
                         item = new ItemForDrawing((int)ItemForDrawing.TypeOfObject.Ellipse, start_coordinates, size);
-                        break;
-                    }
-                case (int)ItemForDrawing.TypeOfObject.String:
-                    {
                         break;
                     }
                 default:
