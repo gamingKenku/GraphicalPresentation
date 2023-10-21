@@ -23,13 +23,14 @@ namespace AffineTransformations
     {
         Regex numeric_regex = new Regex("[^0-9]+");
         Regex float_regex = new Regex(@"^\-?[0-9]+(?:\.[0-9]+)?$");
+        Polygon polygon;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Polygon figure = GetDefaultFigure();
-            canvas.Children.Add(figure);
+            polygon = GetDefaultFigure();
+            canvas.Children.Add(polygon);
         }
 
         private void ValidateNumeric(object sender, TextCompositionEventArgs e)
@@ -39,10 +40,20 @@ namespace AffineTransformations
 
         private void moveButton_Click(object sender, RoutedEventArgs e)
         {
+            bool isXValid = Double.TryParse(xTextBox.Text, out double x);
+            bool isYValid = Double.TryParse(yTextBox.Text, out double y);
 
+            if (!isXValid && !isYValid) 
+            {
+                MessageBox.Show("Некорректные данные.");
+                return;
+            }
+
+            MovePolygon(x, y, canvas, polygon);
+            polygon.InvalidateVisual();
         }
 
-        private bool MovePolygon(int x, int y, Canvas canvas, Polygon polygon)
+        private bool MovePolygon(double x, double y, Canvas canvas, Polygon polygon)
         {
             PointCollection new_points = new PointCollection();
 
@@ -55,6 +66,9 @@ namespace AffineTransformations
                     return false;
                 }
             }
+
+            polygon.Points.Clear();
+            polygon.Points = new_points;
 
             return true;
         }
