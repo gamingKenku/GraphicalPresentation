@@ -115,26 +115,28 @@ namespace AffineTransformations
         private Polygon GetDefaultFigure()
         {
             Polygon result = new Polygon();
+
             PointCollection points = new PointCollection()
             {
-                new Point(100, 100),
-                new Point(125, 125),
+                new Point(0, 100),
+                new Point(25, 125),
+                new Point(25, 110),
                 new Point(125, 110),
-                new Point(225, 110),
-                new Point(225, 125),
-                new Point(250, 100),
-                new Point(225, 75),
-                new Point(225, 90),
-                new Point(185, 90),
-                new Point(185, 40),
-                new Point(200, 40),
-                new Point(175, 15),
-                new Point(150, 40),
-                new Point(165, 40),
-                new Point(165, 90),
+                new Point(125, 125),
+                new Point(150, 100),
+                new Point(125, 75),
                 new Point(125, 90),
-                new Point(125, 75)
+                new Point(85, 90),
+                new Point(85, 40),
+                new Point(100, 40),
+                new Point(75, 15),
+                new Point(50, 40),
+                new Point(65, 40),
+                new Point(65, 90),
+                new Point(25, 90),
+                new Point(25, 75)
             };
+
             result.Points = points;
             result.Stroke = Brushes.Black;
             result.Fill = Brushes.White;
