@@ -21,14 +21,13 @@ namespace AffineTransformations
     /// </summary>
     public partial class MainWindow : Window
     {
-        Polygon polygon;
+        Polygon ?polygon;
+
+        double canvas_height;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            polygon = GetDefaultFigure();
-            canvas.Children.Add(polygon);
         }
 
         private void moveButton_Click(object sender, RoutedEventArgs e)
@@ -42,13 +41,13 @@ namespace AffineTransformations
                 return;
             }
 
-            if (!MovePolygon(x, y, canvas, polygon))
+            if (!MovePolygon(x, y, canvas, polygon!))
             {
                 MessageBox.Show("Фигура вышла за пределы экрана!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             };
 
-            polygon.InvalidateVisual();
+            polygon!.InvalidateVisual();
         }
 
         private static bool MovePolygon(double x, double y, Canvas canvas, Polygon polygon)
@@ -118,24 +117,45 @@ namespace AffineTransformations
 
             PointCollection points = new PointCollection()
             {
-                new Point(0, 100),
-                new Point(25, 125),
-                new Point(25, 110),
-                new Point(125, 110),
-                new Point(125, 125),
-                new Point(150, 100),
-                new Point(125, 75),
-                new Point(125, 90),
-                new Point(85, 90),
-                new Point(85, 40),
-                new Point(100, 40),
-                new Point(75, 15),
-                new Point(50, 40),
-                new Point(65, 40),
-                new Point(65, 90),
-                new Point(25, 90),
-                new Point(25, 75)
+                new Point(0, canvas_height - 25),
+                new Point(25, canvas_height),
+                new Point(25, canvas_height - 15),
+                new Point(125, canvas_height - 15),
+                new Point(125, canvas_height),
+                new Point(150, canvas_height - 25),
+                new Point(125, canvas_height - 50),
+                new Point(125, canvas_height - 35),
+                new Point(85, canvas_height - 35),
+                new Point(85, canvas_height - 85),
+                new Point(100, canvas_height - 85),
+                new Point(75, canvas_height - 110),
+                new Point(50, canvas_height - 85),
+                new Point(65, canvas_height - 85),
+                new Point(65, canvas_height - 35),
+                new Point(25, canvas_height - 35),
+                new Point(25, canvas_height - 50)
             };
+
+            //PointCollection points = new PointCollection()
+            //{
+            //    new Point(0, 100),
+            //    new Point(25, 125),
+            //    new Point(25, 110),
+            //    new Point(125, 110),
+            //    new Point(125, 125),
+            //    new Point(150, 100),
+            //    new Point(125, 75),
+            //    new Point(125, 90),
+            //    new Point(85, 90),
+            //    new Point(85, 40),
+            //    new Point(100, 40),
+            //    new Point(75, 15),
+            //    new Point(50, 40),
+            //    new Point(65, 40),
+            //    new Point(65, 90),
+            //    new Point(25, 90),
+            //    new Point(25, 75)
+            //};
 
             result.Points = points;
             result.Stroke = Brushes.Black;
@@ -154,13 +174,13 @@ namespace AffineTransformations
                 return;
             }
 
-            if (!RotatePolygon(angle_radians, canvas, polygon))
+            if (!RotatePolygon(angle_radians, canvas, polygon!))
             {
                 MessageBox.Show("Фигура вышла за пределы экрана!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             };
 
-            polygon.InvalidateVisual();
+            polygon!.InvalidateVisual();
         }
 
         private void scaleButton_Click(object sender, RoutedEventArgs e)
@@ -174,13 +194,21 @@ namespace AffineTransformations
                 return;
             }
 
-            if (!ScalePolygon(x_multiplier, y_multiplier, canvas, polygon))
+            if (!ScalePolygon(x_multiplier, y_multiplier, canvas, polygon!))
             {
                 MessageBox.Show("Фигура вышла за пределы экрана!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            polygon.InvalidateVisual();
+            polygon!.InvalidateVisual();
+        }
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            canvas_height = canvas.ActualHeight;
+
+            polygon = GetDefaultFigure();
+            canvas.Children.Add(polygon);
         }
     }
 }
