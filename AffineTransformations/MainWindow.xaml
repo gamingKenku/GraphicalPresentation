@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AffineTransformations"
         mc:Ignorable="d"
-        Title="Аффинные преобразования" Height="450" Width="800" MinHeight="450" MinWidth="700">
+        Title="Аффинные преобразования" Height="450" Width="800" MinHeight="450" MinWidth="700" ResizeMode="NoResize">
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -15,19 +15,19 @@
             <StackPanel x:Name="stackPanel">
                 
                 <Label x:Name="xLabel" Margin="0,10,0,0" Content="Координата X" Width="120" Padding="0"/>
-                <TextBox x:Name="xTextBox" TextWrapping="Wrap" Width="120" TextAlignment="Center" PreviewTextInput="ValidateNumeric"/>
+                <TextBox x:Name="xTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
                 <Label x:Name="yLabel" Margin="0,10,0,0" Content="Координата Y" Width="120" Padding="0"/>
-                <TextBox x:Name="yTextBox" TextWrapping="Wrap" Width="120" TextAlignment="Center" PreviewTextInput="ValidateNumeric"/>
+                <TextBox x:Name="yTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
                 <Button x:Name="moveButton" Content="Переместить" Margin="0,10,0,0" Width="120" Click="moveButton_Click"/>
 
                 <Label x:Name="rotateLabel" Margin="0,20,0,0" Content="Угол поворота" Width="120" Padding="0"/>
-                <TextBox x:Name="rotateTextBox" TextWrapping="Wrap" Width="120" TextAlignment="Center" PreviewTextInput="ValidateNumeric"/>
+                <TextBox x:Name="rotateTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
                 <Button x:Name="rotateButton" Content="Повернуть" Margin="0,10,0,0" Width="120" Click="rotateButton_Click"/>
 
                 <Label x:Name="xScaleLabel" Margin="0,20,0,0" Content="Множитель оси X" Width="120" Padding="0"/>
-                <TextBox x:Name="xScaleTextBox" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
+                <TextBox x:Name="xScaleTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
                 <Label x:Name="yScaleLabel" Margin="0,10,0,0" Content="Множитель оси Y" Width="120" Padding="0"/>
-                <TextBox x:Name="yScaleTextBox" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
+                <TextBox x:Name="yScaleTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
                 <Button x:Name="scaleButton" Content="Растянуть/сжать" Margin="0,10,0,0" Width="120" Click="scaleButton_Click"/>
 
             </StackPanel>
