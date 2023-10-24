@@ -50,7 +50,7 @@ namespace AffineTransformations
             polygon!.InvalidateVisual();
         }
 
-        private static bool MovePolygon(double x, double y, Canvas canvas, Polygon polygon)
+        private bool MovePolygon(double x, double y, Canvas canvas, Polygon polygon)
         {
             PointCollection new_points = new PointCollection();
 
@@ -70,14 +70,27 @@ namespace AffineTransformations
             return true;
         }
 
-        private static bool RotatePolygon(double angle_radians, Canvas canvas, Polygon polygon)
+        private bool RotatePolygon(double angle_radians, Canvas canvas, Polygon polygon)
         {
             PointCollection new_points = new PointCollection();
             double angle_degrees = angle_radians * (Math.PI / 180);
 
+            Point center = VertexCenter(polygon.Points.ToList());
+
             foreach (Point point in polygon.Points)
             {
-                new_points.Add(new Point(point.X * Math.Cos(angle_degrees) + point.Y*Math.Sin(angle_degrees), -point.X*Math.Sin(angle_degrees) + point.Y*Math.Cos(angle_degrees)));
+                Point temp_point = new Point(point.X, point.Y);
+
+                temp_point.X = temp_point.X - center.X;
+                temp_point.Y = temp_point.Y - center.Y;
+
+                temp_point.X = temp_point.X * Math.Cos(angle_degrees) + temp_point.Y * Math.Sin(angle_degrees);
+                temp_point.Y = -temp_point.X * Math.Sin(angle_degrees) + temp_point.Y * Math.Cos(angle_degrees);
+
+                temp_point.X = temp_point.X + center.X;
+                temp_point.Y = temp_point.Y + center.Y;
+
+                new_points.Add(temp_point);
 
                 if (new_points.Last().X < 0 || new_points.Last().Y < 0 || new_points.Last().Y > canvas.ActualHeight || new_points.Last().X > canvas.ActualWidth)
                 {
@@ -91,13 +104,26 @@ namespace AffineTransformations
             return true;
         }
 
-        private static bool ScalePolygon(double x_multiplier, double y_multiplier, Canvas canvas, Polygon polygon)
+        private bool ScalePolygon(double x_multiplier, double y_multiplier, Canvas canvas, Polygon polygon)
         {
             PointCollection new_points = new PointCollection();
 
+            Point center = VertexCenter(polygon.Points.ToList());
+
             foreach (Point point in polygon.Points)
             {
-                new_points.Add(new Point(point.X * x_multiplier, point.Y * y_multiplier));
+                Point temp_point = new Point(point.X, point.Y);
+
+                temp_point.X = temp_point.X - center.X;
+                temp_point.Y = temp_point.Y - center.Y;
+
+                temp_point.X = temp_point.X * x_multiplier;
+                temp_point.Y = temp_point.Y * y_multiplier;
+
+                temp_point.X = temp_point.X + center.X;
+                temp_point.Y = temp_point.Y + center.Y;
+
+                new_points.Add(temp_point);
 
                 if (new_points.Last().X < 0 || new_points.Last().Y < 0 || new_points.Last().Y > canvas.ActualHeight || new_points.Last().X > canvas.ActualWidth)
                 {
@@ -188,6 +214,19 @@ namespace AffineTransformations
 
             polygon = GetDefaultFigure();
             canvas.Children.Add(polygon);
+        }
+
+        private Point VertexCenter(List<Point> tempPoints)
+        {
+            Point center = new Point(0, 0);
+            for (int i = 0; i < tempPoints.Count; i++)
+            {
+                center.X += tempPoints[i].X;
+                center.Y += tempPoints[i].Y;
+            }
+            center.X /= tempPoints.Count;
+            center.Y /= tempPoints.Count;
+            return center;
         }
     }
 }
