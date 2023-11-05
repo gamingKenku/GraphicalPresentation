@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicalPresentationLab3",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicalPresentationLab4", "GraphicalPresentationLab4\GraphicalPresentationLab4.csproj", "{8A9FF87B-C24A-48F9-91F4-577C8A6A40CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffineTransformations", "AffineTransformations\AffineTransformations.csproj", "{68F38B10-55B9-410D-88AD-A07D06D678D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AffineTransformations", "AffineTransformations\AffineTransformations.csproj", "{68F38B10-55B9-410D-88AD-A07D06D678D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolygonFillingAlgorithms", "AffineTransformations — копия\PolygonFillingAlgorithms.csproj", "{F6FF64B9-5583-4B34-86DE-E74D5788BC74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{68F38B10-55B9-410D-88AD-A07D06D678D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68F38B10-55B9-410D-88AD-A07D06D678D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68F38B10-55B9-410D-88AD-A07D06D678D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6FF64B9-5583-4B34-86DE-E74D5788BC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FF64B9-5583-4B34-86DE-E74D5788BC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FF64B9-5583-4B34-86DE-E74D5788BC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FF64B9-5583-4B34-86DE-E74D5788BC74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
