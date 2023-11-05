@@ -24,7 +24,9 @@
             </Grid.ColumnDefinitions>
 
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0">
-                <Canvas x:Name="canvas"/>
+                <Canvas x:Name="canvas">
+                    <Image x:Name="image"></Image>
+                </Canvas>
             </Border>
 
             <Label x:Name="yMark1" Content="Y" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,474,0,0" Panel.ZIndex="1" Padding="0,0,0,0"/>
@@ -59,9 +61,6 @@
                 <Button x:Name="floodFillButton" Content="Заливка с затравкой" Margin="0,10,0,0" Width="120" Click="scaleButton_Click"/>
 
                 <Button x:Name="clearFillingButton" Content="Очистить заливку" Margin="0,20,0,0" Width="120" Click="scaleButton_Click"/>
-
-
-
             </StackPanel>
         </Border>
 
