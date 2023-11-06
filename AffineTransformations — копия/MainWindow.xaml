@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PolygonFillingAlgorithms"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Аффинные преобразования" Height="603" Width="800" MinHeight="450" MinWidth="700" ResizeMode="NoResize" Loaded="mainWindow_Loaded">
+        Title="Аффинные преобразования" Height="385" Width="665" ResizeMode="NoResize" MinWidth="665" MinHeight="385">
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -25,42 +25,22 @@
 
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0">
                 <Canvas x:Name="canvas">
-                    <Image x:Name="image"></Image>
+                    <Image x:Name="image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Canvas>
             </Border>
-
-            <Label x:Name="yMark1" Content="Y" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,474,0,0" Panel.ZIndex="1" Padding="0,0,0,0"/>
-            <Label x:Name="yMark" Content="X" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1" Grid.Column="1" Grid.Row="1" Margin="10,0,0,0" Padding="0,0,0,0"/>
-
         </Grid>
 
         <Border x:Name="menuBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Margin="10,10,10,10">
             <StackPanel x:Name="stackPanel">
 
-                <Label x:Name="xLabel" Margin="0,10,0,0" Content="Модуль по X" Width="120" Padding="0"/>
-                <TextBox x:Name="xTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
-                <Label x:Name="yLabel" Margin="0,10,0,0" Content="Модуль по Y" Width="120" Padding="0"/>
-                <TextBox x:Name="yTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
-                <Button x:Name="moveButton" Content="Переместить" Margin="0,10,0,0" Width="120" Click="moveButton_Click"/>
-
-                <Label x:Name="rotateLabel" Margin="0,20,0,0" Content="Угол поворота °" Width="120" Padding="0"/>
-                <TextBox x:Name="rotateTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
-                <Button x:Name="rotateButton" Content="Повернуть" Margin="0,10,0,0" Width="120" Click="rotateButton_Click"/>
-
-                <Label x:Name="xScaleLabel" Margin="0,20,0,0" Content="Множитель по оси X" Width="120" Padding="0"/>
-                <TextBox x:Name="xScaleTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
-                <Label x:Name="yScaleLabel" Margin="0,10,0,0" Content="Множитель по оси Y" Width="120" Padding="0"/>
-                <TextBox x:Name="yScaleTextBox" Text="0" TextWrapping="Wrap" Width="120" TextAlignment="Center"/>
-                <Button x:Name="scaleButton" Content="Растянуть/сжать" Margin="0,10,0,0" Width="120" Click="scaleButton_Click"/>
-
                 <Label x:Name="colorPickerLabel" Margin="0,20,0,0" Content="Выбор цвета заливки" Width="120" Padding="0"/>
-                <xctk:ColorPicker Name="ClrPcker_Background" Width="120"></xctk:ColorPicker>
-                <Button x:Name="stringScanFillButton" Margin="0,10,0,0" Width="120"  Click="scaleButton_Click">
+                <xctk:ColorPicker Name="fillColorPicker" Width="120" SelectedColorChanged="fillColorPicker_SelectedColorChanged"></xctk:ColorPicker>
+                <Button x:Name="stringScanFillButton" Margin="0,10,0,0" Width="120" Click="stringScanFillButton_Click">
                     <TextBlock TextWrapping="Wrap">Построчное сканирование</TextBlock>
                 </Button>
-                <Button x:Name="floodFillButton" Content="Заливка с затравкой" Margin="0,10,0,0" Width="120" Click="scaleButton_Click"/>
+                <Button x:Name="floodFillButton" Content="Заливка с затравкой" Margin="0,10,0,0" Width="120" Click="floodFillButton_Click"/>
 
-                <Button x:Name="clearFillingButton" Content="Очистить заливку" Margin="0,20,0,0" Width="120" Click="scaleButton_Click"/>
+                <Button x:Name="clearFillingButton" Content="Очистить заливку" Margin="0,20,0,0" Width="120" Click="clearFillingButton_Click"/>
             </StackPanel>
         </Border>
 
