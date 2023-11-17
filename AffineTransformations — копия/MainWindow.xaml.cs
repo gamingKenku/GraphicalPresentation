@@ -25,7 +25,7 @@ namespace PolygonFillingAlgorithms
         WriteableBitmap wb;
         Int32Rect pixel_rect;
 
-        int start_x = 160;
+        int start_x = 225;
         int start_y = 170;
 
         int[] coordinates = new int[]
@@ -65,23 +65,34 @@ namespace PolygonFillingAlgorithms
 
         private void fillColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
-
+            if (fillColorPicker.SelectedColor != null) 
+            { 
+                floodFillButton.IsEnabled = true;
+                stringScanFillButton.IsEnabled = true;
+            }
+            else
+            {
+                floodFillButton.IsEnabled = false;
+                stringScanFillButton.IsEnabled = false;
+            }
         }
 
         private void stringScanFillButton_Click(object sender, RoutedEventArgs e)
         {
-
+            LineScanFilling();
         }
         private void floodFillButton_Click(object sender, RoutedEventArgs e)
         {
             FloodFill(start_x, start_y);
-
-            //image.Source = wb;
         }
 
         private void clearFillingButton_Click(object sender, RoutedEventArgs e)
         {
+            wb.Clear();
 
+            wb.DrawPolyline(coordinates, Colors.Black);
+
+            image.Source = wb;
         }
 
         private void WritePixel(int x, int y, Color color)
@@ -105,7 +116,7 @@ namespace PolygonFillingAlgorithms
             wb.WritePixels(pixel_rect, pixelBuffer, 4, 0);
         }
 
-        private void FloodFill(int start_x, int start_y)
+        private async void FloodFill(int start_x, int start_y)
         {
             Stack<Pixel> unfilled_pixels = new Stack<Pixel>();
             Color filling_color;
@@ -137,9 +148,93 @@ namespace PolygonFillingAlgorithms
                     unfilled_pixels.Push(new Pixel(pixel.X, pixel.Y - 1));
                     unfilled_pixels.Push(new Pixel(pixel.X - 1, pixel.Y));
 
-                    Thread.Sleep(1);
+                    await Task.Delay(1);
                 }
             }
+        }
+
+        private async void LineScanFilling()
+        {
+            Color filling_color;
+
+            Color target_color = wb.GetPixel(start_x, start_y);
+
+            if (fillColorPicker.SelectedColor.HasValue)
+            {
+                filling_color = (Color)fillColorPicker.SelectedColor;
+            }
+            else
+            {
+                return;
+            }
+
+            List<Point> polygon_points = ConvertToPointList(coordinates);
+
+            await Task.Run(() =>
+            {
+                double minY = polygon_points.Min(p => p.Y);
+                double maxY = polygon_points.Max(p => p.Y);
+
+                for (int y = (int)minY; y < (int)maxY; y++)
+                {
+                    List<double> nodeX = new List<double>();
+                    for (int i = 0; i < polygon_points.Count; i++)
+                    {
+                        Point p1 = polygon_points[i];
+                        Point p2 = polygon_points[(i + 1) % polygon_points.Count];
+
+                        if ((p1.Y < y && p2.Y >= y) || (p2.Y < y && p1.Y >= y))
+                        {
+                            nodeX.Add(p1.X + (y - p1.Y) / (p2.Y - p1.Y) * (p2.X - p1.X));
+                        }
+                    }
+
+                    nodeX.Sort();
+
+                    wb.Dispatcher.Invoke(() =>
+                    {
+                        for (int i = 0; i < nodeX.Count; i += 2)
+                        {                        
+                            if (nodeX[i] >= wb.Width) break;
+                            if (nodeX[i + 1] > 0)
+                            {
+                                for (int x = (int)nodeX[i] + 1; x < nodeX[i + 1]; x++)
+                                {
+                                    if (x >= 0 && x < wb.Width)
+                                    {
+                                        Color currentPixelColor = wb.GetPixel(x, y);
+                                        if (currentPixelColor == target_color)
+                                        {
+                                            wb.SetPixel(x, y, filling_color);
+                                        }
+                                    }
+                                }
+                            }
+                            Thread.Sleep(1);
+                        }
+                    });
+                }
+            });
+        }
+
+        static List<Point> ConvertToPointList(int[] coordinates)
+        {
+            if (coordinates.Length % 2 != 0)
+            {
+                throw new ArgumentException("Invalid number of coordinates.");
+            }
+
+            List<Point> pointsList = new List<Point>();
+
+            for (int i = 0; i < coordinates.Length; i += 2)
+            {
+                int x = coordinates[i];
+                int y = coordinates[i + 1];
+                Point point = new Point(x, y);
+                pointsList.Add(point);
+            }
+
+            return pointsList;
         }
     }
     public class Pixel

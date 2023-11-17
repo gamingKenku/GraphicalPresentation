@@ -35,10 +35,10 @@
 
                 <Label x:Name="colorPickerLabel" Margin="0,20,0,0" Content="Выбор цвета заливки" Width="120" Padding="0"/>
                 <xctk:ColorPicker Name="fillColorPicker" Width="120" SelectedColorChanged="fillColorPicker_SelectedColorChanged"></xctk:ColorPicker>
-                <Button x:Name="stringScanFillButton" Margin="0,10,0,0" Width="120" Click="stringScanFillButton_Click">
+                <Button x:Name="stringScanFillButton" Margin="0,10,0,0" Width="120" Click="stringScanFillButton_Click" IsEnabled="False">
                     <TextBlock TextWrapping="Wrap">Построчное сканирование</TextBlock>
                 </Button>
-                <Button x:Name="floodFillButton" Content="Заливка с затравкой" Margin="0,10,0,0" Width="120" Click="floodFillButton_Click"/>
+                <Button x:Name="floodFillButton" Content="Заливка с затравкой" Margin="0,10,0,0" Width="120" Click="floodFillButton_Click" IsEnabled="False"/>
 
                 <Button x:Name="clearFillingButton" Content="Очистить заливку" Margin="0,20,0,0" Width="120" Click="clearFillingButton_Click"/>
             </StackPanel>
