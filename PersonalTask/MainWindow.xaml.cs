@@ -29,7 +29,7 @@ namespace PersonalTask
             "Сводчатая"
         };
 
-        Rectangle? previewWindow;
+        Rectangle previewWindow;
 
         public MainWindow()
         {
@@ -37,6 +37,15 @@ namespace PersonalTask
 
             roofShapeCombobox.ItemsSource = roofShapes;
             roofShapeCombobox.SelectedIndex = 0;
+
+            previewWindow = new Rectangle()
+            {
+                Width = 25,
+                Height = 25,
+                Stroke = Brushes.Gray,
+                Fill = Brushes.White,
+                Opacity = 0.5,
+            };
         }
 
         private void buildButton_Click(object sender, RoutedEventArgs e)
@@ -148,9 +157,6 @@ namespace PersonalTask
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             UpdatePreviewWindow(e.GetPosition(canvas));
-            if (previewWindow != null)
-            {
-            }
         }
 
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -160,20 +166,6 @@ namespace PersonalTask
 
         private void UpdatePreviewWindow(Point mouse_position)
         {
-            if (previewWindow == null)
-            {
-                previewWindow = new Rectangle()
-                {
-                    Width = 50,
-                    Height = 50,
-                    Stroke = Brushes.Gray,
-                    Fill = Brushes.White,
-                    Opacity = 0.5,
-                };
-
-                canvas.Children.Add(previewWindow);
-            }
-
             Canvas.SetTop(previewWindow, mouse_position.Y - previewWindow.Height / 2);
             Canvas.SetLeft(previewWindow, mouse_position.X - previewWindow.Width / 2);
         }
@@ -182,8 +174,8 @@ namespace PersonalTask
         {
             Rectangle window = new Rectangle()
             {
-                Width = 50,
-                Height = 50,
+                Width = 25,
+                Height = 25,
                 Stroke = Brushes.Black,
                 Fill = Brushes.White,
             };
@@ -194,13 +186,15 @@ namespace PersonalTask
             Canvas.SetLeft(window, mouse_position.X - window.Width / 2);
         }
 
+        private void canvas_MouseEnter(object sender, MouseEventArgs e)
+        {
+            canvas.Children.Add(previewWindow);
+            UpdatePreviewWindow(e.GetPosition(canvas));
+        }
+
         private void canvas_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (previewWindow != null)
-            {
-                canvas.Children.Remove(previewWindow);
-                previewWindow = null;
-            }
+            canvas.Children.Remove(previewWindow);
         }
     }
 }
