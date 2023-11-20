@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PersonalTask"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="539" Width="889" ResizeMode="CanMinimize">
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -25,15 +25,23 @@
 
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0">
                 <Canvas x:Name="canvas">
-                    <Image x:Name="image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <!--<Image x:Name="image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
                 </Canvas>
             </Border>
         </Grid>
 
         <Border x:Name="menuBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Margin="10,10,10,10">
             <StackPanel x:Name="stackPanel">
-                
-               
+                <Label x:Name="widthLabel" Content="Ширина основания" Margin="20,10,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5,0,5,0"/>
+                <xctk:IntegerUpDown x:Name="widthInput" VerticalAlignment="Top" Margin="20,0,20,0" Minimum="0" Value="100"/>
+                <Label x:Name="heightLabel" Content="Высота основания" Margin="20,10,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5,0,5,0"/>
+                <xctk:IntegerUpDown x:Name="heigthInput" Margin="20,0,20,0" Minimum="0" Value="100"></xctk:IntegerUpDown>
+                <Label x:Name="roofHeightLabel" Content="Высота крыши" Margin="20,10,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5,0,5,0"/>
+                <xctk:IntegerUpDown x:Name="roofHeigthInput" Margin="20,0,20,0" Minimum="0" Value="50"></xctk:IntegerUpDown>
+                <Label x:Name="roofShapeLabel" Content="Форма крыши" Margin="20,10,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5,0,5,0"/>
+                <ComboBox x:Name="roofShapeCombobox" Margin="20,0,20,0"></ComboBox>
+
+                <Button Content="Построить дом" x:Name="buildButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="buildButton_Click"></Button>
             </StackPanel>
         </Border>
 
