@@ -29,6 +29,8 @@ namespace PersonalTask
             "Сводчатая"
         };
 
+        Rectangle? previewWindow;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -122,8 +124,8 @@ namespace PersonalTask
                     break;
                 default:
                     {
-                    MessageBox.Show("Что-то пошло не так.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                        MessageBox.Show("Что-то пошло не так.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
             }
 
@@ -139,10 +141,66 @@ namespace PersonalTask
                 Fill = Brushes.White,
             };
 
-            
-
             canvas.Children.Add(unified_path);
             canvas.InvalidateVisual();
+        }
+
+        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            UpdatePreviewWindow(e.GetPosition(canvas));
+            if (previewWindow != null)
+            {
+            }
+        }
+
+        private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            AddWindow(e.GetPosition(canvas));
+        }
+
+        private void UpdatePreviewWindow(Point mouse_position)
+        {
+            if (previewWindow == null)
+            {
+                previewWindow = new Rectangle()
+                {
+                    Width = 50,
+                    Height = 50,
+                    Stroke = Brushes.Gray,
+                    Fill = Brushes.White,
+                    Opacity = 0.5,
+                };
+
+                canvas.Children.Add(previewWindow);
+            }
+
+            Canvas.SetTop(previewWindow, mouse_position.Y - previewWindow.Height / 2);
+            Canvas.SetLeft(previewWindow, mouse_position.X - previewWindow.Width / 2);
+        }
+
+        private void AddWindow(Point mouse_position)
+        {
+            Rectangle window = new Rectangle()
+            {
+                Width = 50,
+                Height = 50,
+                Stroke = Brushes.Black,
+                Fill = Brushes.White,
+            };
+
+            canvas.Children.Add(window);
+
+            Canvas.SetTop(window, mouse_position.Y - window.Height / 2);
+            Canvas.SetLeft(window, mouse_position.X - window.Width / 2);
+        }
+
+        private void canvas_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (previewWindow != null)
+            {
+                canvas.Children.Remove(previewWindow);
+                previewWindow = null;
+            }
         }
     }
 }

@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0">
-                <Canvas x:Name="canvas">
+                <Canvas x:Name="canvas" MouseMove="canvas_MouseMove" MouseLeftButtonDown="canvas_MouseLeftButtonDown" MouseLeave="canvas_MouseLeave">
                     <!--<Image x:Name="image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
                 </Canvas>
             </Border>
