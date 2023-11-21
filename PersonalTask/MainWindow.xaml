@@ -23,9 +23,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <Canvas x:Name="border_canvas1" Background="White" Panel.ZIndex="1" />
+            <Canvas Grid.Row="1" Grid.ColumnSpan="2" x:Name="border_canvas2" Background="White" Panel.ZIndex="1" />
+
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" >
-                <Canvas x:Name="canvas" MouseMove="canvas_MouseMove" MouseLeftButtonDown="canvas_MouseLeftButtonDown" MouseEnter="canvas_MouseEnter" MouseLeave="canvas_MouseLeave" Background="White">
-                </Canvas>
+                <Canvas x:Name="canvas" MouseMove="canvas_MouseMove" MouseLeftButtonDown="canvas_MouseLeftButtonDown" Background="White"/>
             </Border>
         </Grid>
 

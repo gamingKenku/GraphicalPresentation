@@ -97,14 +97,11 @@ namespace PolygonFillingAlgorithms
 
         private void WritePixel(int x, int y, Color color)
         {
-            // Calculate the index of the pixel in the buffer
-            int stride = wb.PixelWidth * 4; // Assuming Pbgra32 format
+            int stride = wb.PixelWidth * 4;
             int index = y * stride + x * 4;
 
-            // Create a pixel buffer (4 bytes for Pbgra32 format)
             byte[] pixelBuffer = new byte[4];
 
-            // Set the color values in the pixel buffer
             pixelBuffer[0] = color.B;
             pixelBuffer[1] = color.G;
             pixelBuffer[2] = color.R;
@@ -112,7 +109,6 @@ namespace PolygonFillingAlgorithms
 
             pixel_rect.X = x; pixel_rect.Y = y;
 
-            // Write the pixel data to the WriteableBitmap
             wb.WritePixels(pixel_rect, pixelBuffer, 4, 0);
         }
 
@@ -172,33 +168,43 @@ namespace PolygonFillingAlgorithms
 
             await Task.Run(() =>
             {
+                // определяется минимальная и максимальная координата Y среди всех точек фигуры
                 double minY = polygon_points.Min(p => p.Y);
                 double maxY = polygon_points.Max(p => p.Y);
 
+                // цикл перебирает каждую строку между минимальной и максимальной координатами Y
                 for (int y = (int)minY; y < (int)maxY; y++)
                 {
-                    List<double> nodeX = new List<double>();
+                    // список для хранения X координат пересечений с границей фигуры
+                    List<double> crossings = new List<double>();
+                    // цикл итерирует по всем отрезкам, составляющим границу фигуры
                     for (int i = 0; i < polygon_points.Count; i++)
                     {
+                        // получение текущей и следующей точки отрезка
                         Point p1 = polygon_points[i];
                         Point p2 = polygon_points[(i + 1) % polygon_points.Count];
 
+                        // проверка, пересекает ли горизонтальная линия на уровне Y отрезок между p1 и p2
                         if ((p1.Y < y && p2.Y >= y) || (p2.Y < y && p1.Y >= y))
                         {
-                            nodeX.Add(p1.X + (y - p1.Y) / (p2.Y - p1.Y) * (p2.X - p1.X));
+                            // расчет X координаты пересечения и добавление ее в список пересечений
+                            crossings.Add(p1.X + (y - p1.Y) / (p2.Y - p1.Y) * (p2.X - p1.X));
                         }
                     }
 
-                    nodeX.Sort();
+                    crossings.Sort();
 
                     wb.Dispatcher.Invoke(() =>
                     {
-                        for (int i = 0; i < nodeX.Count; i += 2)
-                        {                        
-                            if (nodeX[i] >= wb.Width) break;
-                            if (nodeX[i + 1] > 0)
+                        // закрашивание циклом пикселей между парами пересечений
+                        for (int i = 0; i < crossings.Count; i += 2)
+                        {
+                            // прервать, если первое пересечение за пределами изображения
+                            if (crossings[i] >= wb.Width) break;
+
+                            if (crossings[i + 1] > 0)
                             {
-                                for (int x = (int)nodeX[i] + 1; x < nodeX[i + 1]; x++)
+                                for (int x = (int)crossings[i] + 1; x < crossings[i + 1]; x++)
                                 {
                                     if (x >= 0 && x < wb.Width)
                                     {
@@ -210,7 +216,7 @@ namespace PolygonFillingAlgorithms
                                     }
                                 }
                             }
-                            Thread.Sleep(1);
+                            Thread.Sleep(5);
                         }
                     });
                 }

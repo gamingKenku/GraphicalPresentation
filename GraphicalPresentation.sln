@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicalPresentationLab1", "GraphicalPresentationLab1\GraphicalPresentationLab1.csproj", "{C2A1E25D-3EDB-43C2-9173-95E1CD985A39}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicalPresentationLab2", "GraphicalPresentationLab2\GraphicalPresentationLab2.csproj", "{82DA900A-6468-4417-8FCB-16A62B8EE3EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicalPresentationLab3", "GraphicalPresentationLab3\GraphicalPresentationLab3.csproj", "{D62719D7-C403-4763-863D-596A10337AF7}"
@@ -15,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AffineTransformations", "Af
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolygonFillingAlgorithms", "AffineTransformations — копия\PolygonFillingAlgorithms.csproj", "{F6FF64B9-5583-4B34-86DE-E74D5788BC74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalTask", "PersonalTask\PersonalTask.csproj", "{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalTask", "PersonalTask\PersonalTask.csproj", "{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C2A1E25D-3EDB-43C2-9173-95E1CD985A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2A1E25D-3EDB-43C2-9173-95E1CD985A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2A1E25D-3EDB-43C2-9173-95E1CD985A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2A1E25D-3EDB-43C2-9173-95E1CD985A39}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82DA900A-6468-4417-8FCB-16A62B8EE3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82DA900A-6468-4417-8FCB-16A62B8EE3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82DA900A-6468-4417-8FCB-16A62B8EE3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
