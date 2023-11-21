@@ -30,8 +30,10 @@ namespace PersonalTask
         };
 
         Rectangle previewWindow;
+        Rectangle previewDoor;
         CombinedGeometry house;
         List<Rectangle> placed_rectangles;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -48,13 +50,29 @@ namespace PersonalTask
                 Stroke = Brushes.Gray,
                 Fill = Brushes.White,
                 Opacity = 0.5,
+                Visibility = Visibility.Hidden,
+            };
+
+            previewDoor = new Rectangle()
+            {
+                Width = 25,
+                Height = 50,
+                Stroke = Brushes.Gray,
+                Fill = Brushes.White,
+                Opacity = 0.5,
+                Visibility = Visibility.Hidden,
             };
 
             Panel.SetZIndex(previewWindow, 1);
+            Panel.SetZIndex(previewDoor, 1);
+
             canvas.Children.Add(previewWindow);
+            canvas.Children.Add(previewDoor);
 
             Canvas.SetTop(previewWindow, 0);
             Canvas.SetLeft(previewWindow, 0);
+
+            Canvas.SetBottom(previewDoor, 100);
         }
 
         private void buildButton_Click(object sender, RoutedEventArgs e)
@@ -162,24 +180,45 @@ namespace PersonalTask
             canvas.InvalidateVisual();
         }
 
-        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        private void canvas_MouseMove_Window(object sender, MouseEventArgs e)
         {
             previewWindow.Visibility = IsPointInsideOfHouse(e.GetPosition(canvas), house) ? Visibility.Visible : Visibility.Hidden;
 
-            previewWindow.Stroke = PreviewWindowInsideOfHouse(e.GetPosition(canvas), house, previewWindow) && CheckRectangleOverlapping(previewWindow) ? Brushes.Green : Brushes.Red;
+            previewWindow.Stroke = PreviewRectangleInsideOfHouse(e.GetPosition(canvas), house, previewWindow) && CheckRectangleOverlapping(previewWindow) ? Brushes.Green : Brushes.Red;
 
             UpdatePreviewWindow(e.GetPosition(canvas));
         }
-        private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void canvas_MouseLeftButtonDown_Window(object sender, MouseButtonEventArgs e)
         {
-            if (house != null && PreviewWindowInsideOfHouse(e.GetPosition(canvas), house, previewWindow)) {
+            if (house != null && PreviewRectangleInsideOfHouse(e.GetPosition(canvas), house, previewWindow)) {
                 AddWindow(e.GetPosition(canvas));
+            }
+        }
+
+        private void canvas_MouseMove_Door(object sender, MouseEventArgs e)
+        {
+            previewDoor.Visibility = IsPointInsideOfHouse(e.GetPosition(canvas), house) ? Visibility.Visible : Visibility.Hidden;
+
+            previewDoor.Stroke = PreviewRectangleInsideOfHouse(e.GetPosition(canvas), house, previewWindow) && CheckRectangleOverlapping(previewWindow) ? Brushes.Green : Brushes.Red;
+
+            UpdatePreviewDoor(e.GetPosition(canvas));
+        }
+        private void canvas_MouseLeftButtonDown_Door(object sender, MouseButtonEventArgs e)
+        {
+            if (house != null && PreviewRectangleInsideOfHouse(e.GetPosition(canvas), house, previewWindow))
+            {
+                AddDoor(e.GetPosition(canvas));
             }
         }
 
         private void UpdatePreviewWindow(Point mouse_position)
         {
             Canvas.SetTop(previewWindow, mouse_position.Y - previewWindow.Height / 2);
+            Canvas.SetLeft(previewWindow, mouse_position.X - previewWindow.Width / 2);
+        }
+
+        private void UpdatePreviewDoor(Point mouse_position)
+        {
             Canvas.SetLeft(previewWindow, mouse_position.X - previewWindow.Width / 2);
         }
 
@@ -203,19 +242,39 @@ namespace PersonalTask
             }
         }
 
+        private void AddDoor(Point mouse_position)
+        {
+            Rectangle door = new Rectangle()
+            {
+                Width = 25,
+                Height = 50,
+                Stroke = Brushes.Black,
+                Fill = Brushes.White,
+            };
+
+            Canvas.SetBottom(door, 100);
+            Canvas.SetLeft(door, mouse_position.X - door.Width / 2);
+
+            if (IsPointInsideOfHouse(mouse_position, house) && CheckRectangleOverlapping(door))
+            {
+                canvas.Children.Add(door);
+                placed_rectangles.Add(door);
+            }
+        }
+
         private bool IsPointInsideOfHouse(Point point, CombinedGeometry house)
         {
             return house != null && house.FillContains(point);
         }
 
-        private bool PreviewWindowInsideOfHouse(Point point, CombinedGeometry house, Rectangle previewWindow)
+        private bool PreviewRectangleInsideOfHouse(Point point, CombinedGeometry house, Rectangle previewRectangle)
         {
             bool res;
 
-            if (IsPointInsideOfHouse(new Point(point.X - previewWindow.Width / 2, point.Y - previewWindow.Height / 2), house) &&
-                IsPointInsideOfHouse(new Point(point.X - previewWindow.Width / 2, point.Y + previewWindow.Height / 2), house) &&
-                IsPointInsideOfHouse(new Point(point.X + previewWindow.Width / 2, point.Y + previewWindow.Height / 2), house) &&
-                IsPointInsideOfHouse(new Point(point.X + previewWindow.Width / 2, point.Y - previewWindow.Height / 2), house)) 
+            if (IsPointInsideOfHouse(new Point(point.X - previewRectangle.Width / 2, point.Y - previewRectangle.Height / 2), house) &&
+                IsPointInsideOfHouse(new Point(point.X - previewRectangle.Width / 2, point.Y + previewRectangle.Height / 2), house) &&
+                IsPointInsideOfHouse(new Point(point.X + previewRectangle.Width / 2, point.Y + previewRectangle.Height / 2), house) &&
+                IsPointInsideOfHouse(new Point(point.X + previewRectangle.Width / 2, point.Y - previewRectangle.Height / 2), house)) 
             {
                 res = true;
             }
@@ -249,6 +308,11 @@ namespace PersonalTask
                    rect1.Contains(rect2.TopRight) ||
                    rect1.Contains(rect2.BottomRight) ||
                    rect1.Contains(rect2.BottomLeft);
+        }
+
+        private void modeToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
