@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PersonalTask"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="539" Width="889" ResizeMode="CanMinimize">
+        Title="MainWindow" Height="539" Width="889" ResizeMode="CanMinimize" Loaded="Window_Loaded">
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -27,7 +27,7 @@
             <Canvas Grid.Row="1" Grid.ColumnSpan="2" x:Name="border_canvas2" Background="White" Panel.ZIndex="1" />
 
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" >
-                <Canvas x:Name="canvas" MouseMove="canvas_MouseMove_Window" MouseLeftButtonDown="canvas_MouseLeftButtonDown_Window" Background="White"/>
+                <Canvas x:Name="canvas" Background="White"/>
             </Border>
         </Grid>
 
@@ -41,11 +41,13 @@
                 <xctk:IntegerUpDown x:Name="roofHeigthInput" Margin="20,0,20,0" Minimum="0" Value="50"></xctk:IntegerUpDown>
                 <Label x:Name="roofShapeLabel" Content="Форма крыши" Margin="20,10,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5,0,5,0"/>
                 <ComboBox x:Name="roofShapeCombobox" Margin="20,0,20,0"></ComboBox>
-                
-                <ToggleButton x:Name="windowsToggleButton" Content="Ставить окна" Margin="20,20,20,0" Checked="modeToggleButton_Checked"></ToggleButton>
-                <ToggleButton x:Name="doorsToggleButton" Content="Ставить двери" Margin="20,10,20,0" Checked="modeToggleButton_Checked"></ToggleButton>
 
-                <Button Content="Построить дом" x:Name="buildButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="buildButton_Click"></Button>
+                <ToggleButton x:Name="windowsToggleButton" Content="Ставить окна" Margin="20,20,20,0" Click="modesToggleButton_Click"/>
+                <ToggleButton x:Name="doorsToggleButton" Content="Ставить двери" Margin="20,10,20,0" Click="modesToggleButton_Click"></ToggleButton>
+
+                <Button Content="Построить дом" x:Name="buildButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="buildButton_Click" ></Button>
+
+                <Button Content="Очистить панель" x:Name="clearButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="clearButton_Click"></Button>
             </StackPanel>
         </Border>
 
