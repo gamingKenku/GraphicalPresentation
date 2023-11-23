@@ -206,6 +206,7 @@ namespace PersonalTask
 
             UpdatePreviewWindow(e.GetPosition(canvas));
         }
+
         private void canvas_MouseLeftButtonDown_Window(object sender, MouseButtonEventArgs e)
         {
             if (house != null && PreviewRectangleInsideOfHouse(house, previewWindow)) {
@@ -226,12 +227,23 @@ namespace PersonalTask
 
             UpdatePreviewDoor(e.GetPosition(canvas));
         }
+
         private void canvas_MouseLeftButtonDown_Door(object sender, MouseButtonEventArgs e)
         {
             if (house != null && PreviewRectangleInsideOfHouse(house, previewDoor))
             {
                 AddDoor(e.GetPosition(canvas));
             }
+        }
+
+        private void canvas_MouseMove_Delete(object sender, MouseEventArgs e)
+        {
+            UpdatePlacedRectangle(e.GetPosition(canvas));
+        }
+
+        private void canvas_MouseLeftButtonDown_Delete(object sender, MouseButtonEventArgs e)
+        {
+            DeleteRectangle(e.GetPosition(canvas));
         }
 
         private void UpdatePreviewWindow(Point mouse_position)
@@ -243,6 +255,16 @@ namespace PersonalTask
         private void UpdatePreviewDoor(Point mouse_position)
         {
             Canvas.SetLeft(previewDoor, RoundToClosestDivisible(mouse_position.X - previewDoor.Width / 2, grid_step));
+        }
+
+        private void UpdatePlacedRectangle(Point mouse_position)
+        {
+            Rectangle? rectangle_under_mouse = GetRectangleByPoint(mouse_position);
+
+            foreach (Rectangle rectangle in placed_rectangles)
+            {
+                rectangle.Stroke = rectangle_under_mouse == rectangle ? Brushes.Red : Brushes.Black;
+            }
         }
 
         private void AddWindow(Point mouse_position)
@@ -283,6 +305,36 @@ namespace PersonalTask
                 canvas.Children.Add(door);
                 placed_rectangles.Add(door);
             }
+        }
+
+        private void DeleteRectangle(Point mouse_position)
+        {
+            Rectangle? rectangle_to_delete = GetRectangleByPoint(mouse_position);
+
+            if (rectangle_to_delete == null)
+            {
+                return;
+            }
+
+            placed_rectangles.Remove(rectangle_to_delete);
+            canvas.Children.Remove(rectangle_to_delete);
+        }
+
+        private Rectangle? GetRectangleByPoint(Point point)
+        {
+            Rect temp_rect;
+            Rectangle? res = null;
+
+            foreach (Rectangle rectangle in placed_rectangles)
+            {
+                temp_rect = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);
+                if (temp_rect.Contains(point))
+                {
+                    res = rectangle;
+                }
+            }
+
+            return res;
         }
 
         private bool IsPointInsideOfHouse(Point point, CombinedGeometry house)
@@ -343,18 +395,29 @@ namespace PersonalTask
             canvas.MouseLeftButtonDown -= canvas_MouseLeftButtonDown_Door;
             canvas.MouseMove -= canvas_MouseMove_Window;
             canvas.MouseLeftButtonDown -= canvas_MouseLeftButtonDown_Window;
+            canvas.MouseMove -= canvas_MouseMove_Delete;
+            canvas.MouseLeftButtonDown -= canvas_MouseLeftButtonDown_Delete;
 
             if (sender == windowsToggleButton && windowsToggleButton.IsChecked == true)
             {
                 canvas.MouseMove += canvas_MouseMove_Window;
                 canvas.MouseLeftButtonDown += canvas_MouseLeftButtonDown_Window;
                 doorsToggleButton.IsChecked = false;
+                deleteToggleButton.IsChecked = false;
             }
             else if (sender == doorsToggleButton && doorsToggleButton.IsChecked == true)
             {
                 canvas.MouseMove += canvas_MouseMove_Door;
                 canvas.MouseLeftButtonDown += canvas_MouseLeftButtonDown_Door;
                 windowsToggleButton.IsChecked = false;
+                deleteToggleButton.IsChecked = false;
+            }
+            else if (sender == deleteToggleButton && deleteToggleButton.IsChecked == true)
+            {
+                canvas.MouseMove += canvas_MouseMove_Delete;
+                canvas.MouseLeftButtonDown += canvas_MouseLeftButtonDown_Delete;
+                windowsToggleButton.IsChecked = false;
+                doorsToggleButton.IsChecked = false;
             }
         }
 
