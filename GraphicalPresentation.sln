@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolygonFillingAlgorithms", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalTask", "PersonalTask\PersonalTask.csproj", "{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractals", "Fractals\Fractals.csproj", "{B364B34C-42BC-4DCF-A088-73742DE11B0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
