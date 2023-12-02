@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,12 @@ namespace Fractals
         double canvas_width;
         double canvas_height;
 
+        enum Turn
+        {
+            Left,
+            Right,
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,19 +47,35 @@ namespace Fractals
 
             canvas.Children.Clear();
 
-            Point start = new Point()
+            StreamGeometry dragon_curve_geometry = new StreamGeometry();
+
+            Path path = new Path()
             {
-                X = canvas_width / 4,
-                Y = canvas_height / 2,
+                Data = dragon_curve_geometry,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
             };
 
-            Point end = new Point()
-            {
-                X = canvas_width - canvas_width / 4,
-                Y = canvas_height / 2,
-            };
+            canvas.Children.Add(path);
 
-            DrawDragon(start, end, (int) nestingLevelInput.Value!, canvas);
+            using (StreamGeometryContext context = dragon_curve_geometry.Open())
+            {
+                Point start = new Point()
+                {
+                    X = canvas_width / 4,
+                    Y = canvas_height / 2,
+                };
+
+                Point end = new Point()
+                {
+                    X = canvas_width - canvas_width / 4,
+                    Y = canvas_height / 2,
+                };
+
+                context.BeginFigure(start, false, false);
+
+                DrawDragon(start, end, (int)nestingLevelInput.Value!, canvas, Turn.Left, context);
+            }
         }
 
         private void clearButton_Click(object sender, RoutedEventArgs e)
@@ -60,37 +83,39 @@ namespace Fractals
             canvas.Children.Clear();
         }
 
-        private void DrawDragon(Point start, Point end, int depth_level, Canvas canvas)
+        private void DrawDragon(Point start, Point end, int depth_level, Canvas canvas, Turn turn, StreamGeometryContext context)
         {
+            Point n;
+
             if (depth_level > 0)
             {
-                Point n = new Point()
+                switch (turn)
                 {
-                    X = ((start.X + end.X) / 2) + ((end.Y - start.Y) / 2),
-                    Y = ((start.Y + end.Y) / 2) - ((end.X - start.X) / 2),
-                };
+                    case Turn.Left:
+                        n = new Point()
+                        {
+                            X = ((start.X + end.X) / 2) + ((end.Y - start.Y) / 2),
+                            Y = ((start.Y + end.Y) / 2) - ((end.X - start.X) / 2),
+                        };
+                        break;
+                    case Turn.Right:
+                        n = new Point()
+                        {
+                            X = ((start.X + end.X) / 2) - ((end.Y - start.Y) / 2),
+                            Y = ((start.Y + end.Y) / 2) + ((end.X - start.X) / 2),
+                        };
+                        break;
+                    default:
+                        return;
+                }
 
-                DrawDragon(start, n, depth_level - 1, canvas);
-                DrawDragon(end, n, depth_level - 1, canvas);
+                DrawDragon(start, n, depth_level - 1, canvas, Turn.Left, context);
+                DrawDragon(n, end, depth_level - 1, canvas, Turn.Right, context);
             }
             else
             {
-                Line line = new Line()
-                {
-                    X1 = start.X,
-                    Y1 = start.Y,
-                    X2 = end.X,
-                    Y2 = end.Y,
-                    Stroke = Brushes.Black,
-                };
-
-                canvas.Children.Add(line);
+                context.LineTo(end, true, false);
             }
-        }
-
-        private void nestingLevelInput_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

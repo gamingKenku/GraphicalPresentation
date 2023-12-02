@@ -36,10 +36,10 @@
         <Border x:Name="menuBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Margin="10,10,10,10" IsHitTestVisible="True">
             <StackPanel x:Name="stackPanel">
                 <Label x:Name="widthLabel" Content="Уровень вложенности" Margin="20,10,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5,0,5,0"/>
-                <xctk:IntegerUpDown x:Name="nestingLevelInput" VerticalAlignment="Top" Margin="20,0,20,0" Minimum="0" Value="0" ValueChanged="nestingLevelInput_ValueChanged"/>
+                <xctk:IntegerUpDown x:Name="nestingLevelInput" VerticalAlignment="Top" Margin="20,0,20,0" Minimum="0" Maximum="20" Value="0"/>
 
                 <Button Content="Нарисовать фрактал" x:Name="drawButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="drawButton_Click"></Button>
-                <Button Content="Очистить панель" x:Name="clearButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="clearButton_Click"></Button>
+                <Button Content="Очистить панель" x:Name="clearButton" Margin="20,10,20,0" Padding="5,5,5,5" Click="clearButton_Click"></Button>
             </StackPanel>
         </Border>
 
