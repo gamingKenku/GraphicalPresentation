@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolygonFillingAlgorithms", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalTask", "PersonalTask\PersonalTask.csproj", "{91E6D2F4-3D0E-4ECF-80D2-A5E93FE8D42A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractals", "Fractals\Fractals.csproj", "{B364B34C-42BC-4DCF-A088-73742DE11B0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fractals", "Fractals\Fractals.csproj", "{B364B34C-42BC-4DCF-A088-73742DE11B0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bezier", "Bezier\Bezier.csproj", "{B9CFA6A0-1D95-4A08-ACA7-DF08869D4734}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B364B34C-42BC-4DCF-A088-73742DE11B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9CFA6A0-1D95-4A08-ACA7-DF08869D4734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9CFA6A0-1D95-4A08-ACA7-DF08869D4734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9CFA6A0-1D95-4A08-ACA7-DF08869D4734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9CFA6A0-1D95-4A08-ACA7-DF08869D4734}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

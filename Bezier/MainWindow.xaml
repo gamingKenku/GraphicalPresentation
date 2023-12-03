@@ -1,0 +1,45 @@
+﻿<Window x:Class="Bezier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bezier"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="539" Width="889" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Grid x:Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="grid_canvas" Grid.Column="1" Margin="0,15,15,0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Canvas x:Name="border_canvas1" Background="White" Panel.ZIndex="1" MouseMove="border_canvas_MouseMove" />
+            <Canvas Grid.Row="1" Grid.ColumnSpan="2" x:Name="border_canvas2" MouseMove="border_canvas_MouseMove" Background="White" Panel.ZIndex="1" />
+
+            <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" >
+                <Canvas x:Name="canvas" Background="White" MouseMove="canvas_MouseMove" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
+                    <Image x:Name="image"></Image>
+                </Canvas>
+            </Border>
+        </Grid>
+
+        <Border x:Name="menuBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Margin="10,10,10,10" IsHitTestVisible="True">
+            <StackPanel x:Name="stackPanel">
+                <ToggleButton Content="Ставить опорные точки" x:Name="placePointstoggleButton" Margin="20,20,20,0" Click="placePointsToggleButton_Click"></ToggleButton>
+
+                <Button Content="Нарисовать сплайн" x:Name="drawButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="drawButton_Click"></Button>
+                <Button Content="Очистить панель" x:Name="clearButton" Margin="20,10,20,0" Padding="5,5,5,5" Click="clearButton_Click"></Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
