@@ -27,7 +27,7 @@
             <Canvas Grid.Row="1" Grid.ColumnSpan="2" x:Name="border_canvas2" MouseMove="border_canvas_MouseMove" Background="White" Panel.ZIndex="1" />
 
             <Border x:Name="canvasBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" >
-                <Canvas x:Name="canvas" Background="White" MouseMove="canvas_MouseMove" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
+                <Canvas x:Name="canvas" Background="White">
                     <Image x:Name="image"></Image>
                 </Canvas>
             </Border>
@@ -35,10 +35,13 @@
 
         <Border x:Name="menuBorder" BorderBrush="Black" BorderThickness="1" Grid.Column="0" Margin="10,10,10,10" IsHitTestVisible="True">
             <StackPanel x:Name="stackPanel">
-                <ToggleButton Content="Ставить опорные точки" x:Name="placePointstoggleButton" Margin="20,20,20,0" Click="placePointsToggleButton_Click"></ToggleButton>
+                <ToggleButton Content="Ставить опорные точки" x:Name="placePointsToggleButton" Margin="20,20,20,0" Click="modeToggleButton_Click"></ToggleButton>
+                <ToggleButton Content="Удалять опорные точки" x:Name="deletePointsToggleButton" Margin="20,10,20,0" Click="modeToggleButton_Click"></ToggleButton>
+                <ToggleButton x:Name="movePointsToggleButton" Margin="20,10,20,0" Click="modeToggleButton_Click">
+                    <TextBlock>Перемещать опорные <LineBreak/>точки</TextBlock>
+                </ToggleButton>
 
-                <Button Content="Нарисовать сплайн" x:Name="drawButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="drawButton_Click"></Button>
-                <Button Content="Очистить панель" x:Name="clearButton" Margin="20,10,20,0" Padding="5,5,5,5" Click="clearButton_Click"></Button>
+                <Button Content="Очистить панель" x:Name="clearButton" Margin="20,50,20,0" Padding="5,5,5,5" Click="clearButton_Click"></Button>
             </StackPanel>
         </Border>
     </Grid>
