@@ -14,6 +14,8 @@ namespace Bezier
     {
         private PointCollection anchor_points;
         private Ellipse preview_point;
+        double t_step = 0.001;
+        Path? bezier_path;
 
         public MainWindow()
         {
@@ -34,7 +36,7 @@ namespace Bezier
             Panel.SetZIndex(preview_point, 1);
         }
 
-        private void DrawBezier(PointCollection anchor_points, Canvas canvas, StreamGeometryContext context, double t_step)
+        private void DrawBezier(PointCollection anchor_points, StreamGeometryContext context, double t_step)
         {
             for (double t = 0; t <= 1; t += t_step)
             {
@@ -110,7 +112,31 @@ namespace Bezier
 
         private void drawButton_Click(object sender, RoutedEventArgs e)
         {
+            if (anchor_points.Count < 2)
+            {
+                MessageBox.Show("Количество опорных точек не должно быть меньше двух.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            canvas.Children.Remove(bezier_path);
+
+            StreamGeometry bezier = new StreamGeometry();
+
+            using (StreamGeometryContext context = bezier.Open())
+            {
+                context.BeginFigure(anchor_points[0], false, false);
+
+                DrawBezier(anchor_points, context, t_step);
+            }
+
+            bezier_path = new Path() 
+            {
+                Data = bezier,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
+            };
+
+            canvas.Children.Add(bezier_path);
         }
 
         private void clearButton_Click(object sender, RoutedEventArgs e)
